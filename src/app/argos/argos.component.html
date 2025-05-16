@@ -1,55 +1,120 @@
-<div class="container mx-auto px-4 py-8">
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="relative min-h-screen flex flex-col md:flex-row">
+  <div
+    class="hidden md:flex w-1/2 relative
+           bg-[url('/assets/left-bg.png')] bg-cover bg-center"
+  >
+    <div class="absolute inset-0 bg-[#1E3A8A]/80"></div>
 
-    <div class="bg-blue-50 rounded-2xl p-6 flex flex-col items-center text-center">
-      <img src="assets/argos-icon.svg" alt="Argos logo" class="w-12 h-12 mb-4" />
-      <h3 class="text-2xl font-semibold text-gray-800 mb-2">VACANCY.ARGOS.UZ</h3>
-      <p class="text-gray-600 mb-6">
-        Yagona portal – davlat organlari tomonidan taqdim etiladigan yagona nuqtasi
-      </p>
-      <a
-        href="https://vacancy.argos.uz"
-        target="_blank"
-        class="inline-flex items-center bg-[#1C7AB0] text-white font-medium py-2 px-4 rounded-full transition"
+    <div
+      class="absolute bottom-8 left-0 right-0
+             flex flex-col pl-8 md:pl-16 lg:pl-24 pr-8"
+    >
+      <h1
+        class="
+          font-bold text-white leading-tight break-words
+          text-[clamp(24px,6vw,80px)]
+        "
       >
-        Book on Viator
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="w-4 h-4 ml-2"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          stroke-width="2"
+        EDU.<wbr>ARGOS.UZ
+      </h1>
+      <p
+        class="
+          mt-4 text-white max-w-sm break-words
+          text-[clamp(14px,3vw,24px)]
+        "
+      >
+        Davlat fuqarolik xizmatchilari uchun masofaviy malaka oshirish portali
+      </p>
+    </div>
+  </div>
+
+  <div
+    [ngClass]="{
+      'bg-white text-gray-900': !isDark,
+      'bg-gray-900 text-white':    isDark
+    }"
+    class="flex flex-1 flex-col justify-center items-center p-8 transition-colors duration-300"
+  >
+    <div class="absolute top-4 right-4 z-20 flex items-center space-x-2">
+      <div class="relative">
+        <button
+          (click)="toggleLanguageMenu()"
+          class="h-8 px-3 text-[#1E3A8A] font-semibold bg-white/90 rounded-full shadow flex items-center justify-center text-sm"
         >
-          <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-        </svg>
-      </a>
+          {{ currentLang }}
+          <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd"
+              d="M5.23 7.21a.75.75 0 011.06.02L10 11.063l3.71-3.83a.75.75
+                 0 111.08 1.04l-4.25 4.39a.75.75 0 01-1.08 0l-4.25-4.39a.75.75
+                 0 01.02-1.06z"
+              clip-rule="evenodd"/>
+          </svg>
+        </button>
+        <div
+          *ngIf="languageMenuOpen"
+          class="absolute right-0 mt-2 bg-white rounded-md shadow-lg overflow-hidden"
+        >
+          <button
+            (click)="selectLanguage('Uz')"
+            class="block w-full px-4 py-2 text-[#1E3A8A] text-left hover:bg-gray-100 text-sm"
+          >
+            Uz
+          </button>
+          <button
+            (click)="selectLanguage('En')"
+            class="block w-full px-4 py-2 text-left text-[#1E3A8A] hover:bg-gray-100 text-sm"
+          >
+            En
+          </button>
+          <button
+            (click)="selectLanguage('Ru')"
+            class="block w-full px-4 py-2 text-left text-[#1E3A8A] hover:bg-gray-100 text-sm"
+          >
+            Ru
+          </button>
+        </div>
+      </div>
+      <div class="h-8 flex items-center bg-white/90 border border-gray-200 rounded-full px-1 shadow">
+        <button
+          (click)="isDark = false"
+          class="w-8 h-8 flex items-center justify-center rounded-full"
+        >
+          <img src="assets/sun.png" alt="Light mode" class="w-4 h-4" />
+        </button>
+        <button
+          (click)="isDark = true"
+          class="w-8 h-8 flex items-center justify-center rounded-full"
+        >
+          <img src="assets/moon.png" alt="Dark mode" class="w-4 h-4" />
+        </button>
+      </div>
     </div>
 
-    <div class="bg-blue-50 rounded-2xl p-6 flex flex-col items-center text-center">
-      <img src="assets/argos-icon.svg" alt="Argos logo" class="w-12 h-12 mb-4" />
-      <h3 class="text-2xl font-semibold text-gray-800 mb-2">HRM.ARGOS.UZ</h3>
-      <p class="text-gray-600 mb-6">
-        Yagona portal – davlat organlari tomonidan taqdim etiladigan yagona nuqtasi
-      </p>
-      <a
-        href="https://hrm.argos.uz"
-        target="_blank"
-        class="inline-flex items-center bg-[#1C7AB0] text-white font-medium py-2 px-4 rounded-full transition"
-      >
-        Book on Viator
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="w-4 h-4 ml-2"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          stroke-width="2"
-        >
-          <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-        </svg>
-      </a>
+    <div class="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 mb-8">
+      <img src="assets/logo1.png" alt="Agency Logo" class="h-[82px] w-[277px]" />
+      <img src="assets/logo2.png" alt="UzInfocom"    class="h-[50.47px] w-[251.3px]" />
     </div>
 
+    <div
+      class="rounded-2xl shadow-lg p-10 w-full max-w-sm transition-colors duration-300"
+      [ngClass]="{
+        'bg-[#F8FAFC] text-[#0F172A] font-[600] border-[#F1F5F9]': !isDark,
+        'bg-[#252B37] text-white border-[#1D293D] font-semibold': isDark
+      }"
+      style="font-family: 'SF Pro Display', sans-serif;"
+>
+      <p class="text-center mb-6">
+        Davlat xizmatchilarining malakasini oshirish onlayn platformasiga
+        kirish uchun ma’lumotlarni kiriting
+      </p>
+
+      <div class="flex justify-center mb-6">
+        <img src="assets/person.png" alt="OneID icon" class="h-[130px] w-[100px]" />
+      </div>
+
+      <button class="w-full py-3 bg-[#1E3A8A] hover:bg-opacity-90 text-white font-[600] font-[SF Pro Display] rounded-lg">
+        OneID bilan tizimga kirish →
+      </button>
+    </div>
   </div>
 </div>
