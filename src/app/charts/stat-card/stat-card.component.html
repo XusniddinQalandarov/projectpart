@@ -1,0 +1,21 @@
+<div class="bg-white rounded-2xl shadow p-4 sm:p-5 md:p-6">
+  <div class="grid grid-cols-[auto_1fr] gap-x-2 sm:gap-x-3 gap-y-1 sm:gap-y-2">
+    <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-blue-600 flex items-center justify-center">
+      <img
+        src="/assets/home.png"
+        class="w-4 h-4 sm:w-5 sm:h-5"
+        alt=""
+      />
+    </div>
+
+    <div>
+      <h5 class="text-sm sm:text-base md:text-lg font-bold leading-tight">{{ title }}</h5>
+    </div>
+
+    <div></div>
+
+    <div class="justify-self-end">
+      <p class="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight" [ngClass]="valueClass">{{ value }}</p>
+    </div>
+  </div>
+</div>

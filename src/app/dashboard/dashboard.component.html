@@ -1,0 +1,52 @@
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-4 p-4">
+  <app-gender-stats-chart></app-gender-stats-chart>
+  <app-age-stats-chart></app-age-stats-chart>
+
+  <div class="col-span-1 lg:col-span-2">
+    <app-active-period-chart></app-active-period-chart>
+  </div>
+
+
+  <app-top5-chart
+    [title]="'TOP-5 по популярности'"
+    [data]="top5Popularity"
+    barColor="#244192">
+  </app-top5-chart>
+
+  <app-top5-chart
+    [title]="'TOP-5 по успеваемости'"
+    [data]="top5Performance"
+    barColor="#DCBA8D">
+  </app-top5-chart>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
+  <app-stat-card
+    title="Всего пользователей"
+    [value]="totalUsers | number">
+  </app-stat-card>
+
+  <app-stat-card
+    title="Всего курсов"
+    [value]="totalCourses">
+  </app-stat-card>
+
+  <app-stat-card
+    title="Среднее время прохождения"
+    [value]="avgTime">
+  </app-stat-card>
+
+  <app-stat-card
+    title="Выдано сертификатов"
+    [value]="issuedCertificates | number">
+  </app-stat-card>
+
+  <app-stat-card
+    title="Ташкилотлар сони"
+    [value]="organizationCount | number">
+  </app-stat-card>
+
+  <app-stat-card
+    title="Уртача натижа"
+    [value]="averageResult">
+  </app-stat-card>
+</div>

@@ -1,13 +1,15 @@
+// src/app/app.component.ts
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { ArgosComponent } from './argos/argos.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @Component({
   selector: 'app-root',
-  imports: [ArgosComponent],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
+  standalone: true,
+  imports: [DashboardComponent],
+  template: `
+    <main class="min-h-screen bg-gray-50 p-4">
+      <app-dashboard></app-dashboard>
+    </main>
+  `,
 })
-export class AppComponent {
-  title = 'projectpart';
-}
+export class AppComponent {}
