@@ -1,0 +1,11 @@
+{
+  "header": "EDU.ARGOS.UZ",
+  "subheader": "Distance learning portal for government employees",
+  "description": "Enter your credentials to access the online upskilling platform",
+  "button": "Log in with OneID →",
+  "lang": {
+    "uz": "Uz",
+    "en": "En",
+    "ru": "Ru"
+  }
+}

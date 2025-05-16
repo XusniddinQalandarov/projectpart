@@ -4,30 +4,21 @@
            bg-[url('/assets/left-bg.png')] bg-cover bg-center"
   >
     <div class="absolute inset-0 bg-[#1E3A8A]/80"></div>
-
     <div
       class="absolute bottom-8 left-0 right-0
              flex flex-col pl-8 md:pl-16 lg:pl-24 pr-8"
     >
-      <h1
-        class="
+      <h1 class="
           font-bold text-white leading-tight break-words
           text-[clamp(24px,6vw,80px)]
-        "
-      >
-        EDU.<wbr>ARGOS.UZ
+        ">
+        {{ 'header' | transloco }}
       </h1>
-      <p
-        class="
-          mt-4 text-white max-w-sm break-words
-          text-[clamp(14px,3vw,24px)]
-        "
-      >
-        Davlat fuqarolik xizmatchilari uchun masofaviy malaka oshirish portali
+      <p class="mt-4 text-white max-w-sm break-words text-[clamp(14px,3vw,24px)]">
+        {{ 'subheader' | transloco }}
       </p>
     </div>
   </div>
-
   <div
     [ngClass]="{
       'bg-white text-gray-900': !isDark,
@@ -35,45 +26,35 @@
     }"
     class="flex flex-1 flex-col justify-center items-center p-8 transition-colors duration-300"
   >
-    <div class="absolute top-4 right-4 z-20 flex items-center space-x-2">
+    <div class="absolute text-[#1E3A8A] top-4 right-4 z-20 flex items-center space-x-2">
       <div class="relative">
         <button
           (click)="toggleLanguageMenu()"
-          class="h-8 px-3 text-[#1E3A8A] font-semibold bg-white/90 rounded-full shadow flex items-center justify-center text-sm"
+          class="h-8 px-3 bg-white/90 font-semibold rounded-full shadow hover:bg-gray-100 flex items-center justify-center text-sm"
         >
-          {{ currentLang }}
+          {{ ('lang.' + currentLang) | transloco }}
           <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
             <path fill-rule="evenodd"
-              d="M5.23 7.21a.75.75 0 011.06.02L10 11.063l3.71-3.83a.75.75
-                 0 111.08 1.04l-4.25 4.39a.75.75 0 01-1.08 0l-4.25-4.39a.75.75
-                 0 01.02-1.06z"
+              d="M5.23 7.21a.75.75 0 011.06.02L10
+                 11.063l3.71-3.83a.75.75 0 111.08 1.04
+                 l-4.25 4.39a.75.75 0 01-1.08 0l-4.25-4.39
+                 a.75.75 0 01.02-1.06z"
               clip-rule="evenodd"/>
           </svg>
         </button>
-        <div
-          *ngIf="languageMenuOpen"
-          class="absolute right-0 mt-2 bg-white rounded-md shadow-lg overflow-hidden"
-        >
+        <div *ngIf="languageMenuOpen"
+             class="absolute right-0 mt-2 bg-white rounded-md shadow-lg overflow-hidden">
           <button
-            (click)="selectLanguage('Uz')"
-            class="block w-full px-4 py-2 text-[#1E3A8A] text-left hover:bg-gray-100 text-sm"
-          >
-            Uz
-          </button>
-          <button
-            (click)="selectLanguage('En')"
-            class="block w-full px-4 py-2 text-left text-[#1E3A8A] hover:bg-gray-100 text-sm"
-          >
-            En
-          </button>
-          <button
-            (click)="selectLanguage('Ru')"
-            class="block w-full px-4 py-2 text-left text-[#1E3A8A] hover:bg-gray-100 text-sm"
-          >
-            Ru
+            *ngFor="let lang of languages"
+            (click)="selectLanguage(lang)"
+            class="block w-full px-4 py-2 text-left hover:bg-gray-100 text-sm"
+            [ngClass]="{'font-semibold': lang === currentLang}"
+            >
+            {{ ('lang.' + lang) | transloco }}
           </button>
         </div>
       </div>
+
       <div class="h-8 flex items-center bg-white/90 border border-gray-200 rounded-full px-1 shadow">
         <button
           (click)="isDark = false"
@@ -83,7 +64,7 @@
         </button>
         <button
           (click)="isDark = true"
-          class="w-8 h-8 flex items-center justify-center rounded-full"
+          class="w-8 h-8 flex items-center justify-center rounded-full "
         >
           <img src="assets/moon.png" alt="Dark mode" class="w-4 h-4" />
         </button>
@@ -101,19 +82,15 @@
         'bg-[#F8FAFC] text-[#0F172A] font-[600] border-[#F1F5F9]': !isDark,
         'bg-[#252B37] text-white border-[#1D293D] font-semibold': isDark
       }"
-      style="font-family: 'SF Pro Display', sans-serif;"
->
+    >
       <p class="text-center mb-6">
-        Davlat xizmatchilarining malakasini oshirish onlayn platformasiga
-        kirish uchun ma’lumotlarni kiriting
+        {{ 'description' | transloco }}
       </p>
-
       <div class="flex justify-center mb-6">
         <img src="assets/person.png" alt="OneID icon" class="h-[130px] w-[100px]" />
       </div>
-
-      <button class="w-full py-3 bg-[#1E3A8A] hover:bg-opacity-90 text-white font-[600] font-[SF Pro Display] rounded-lg">
-        OneID bilan tizimga kirish →
+      <button class="w-full py-3 bg-[#1E3A8A] hover:bg-opacity-90 text-white font-semibold rounded-lg">
+        {{ 'button' | transloco }}
       </button>
     </div>
   </div>

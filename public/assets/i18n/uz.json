@@ -1,0 +1,11 @@
+{
+  "header": "EDU.ARGOS.UZ",
+  "subheader": "Davlat fuqarolik xizmatchilari uchun masofaviy malaka oshirish portali",
+  "description": "Davlat xizmatchilarining malakasini oshirish onlayn platformasiga kirish uchun ma’lumotlarni kiriting",
+  "button": "OneID bilan tizimga kirish →",
+  "lang": {
+    "uz": "Uz",
+    "en": "En",
+    "ru": "Ru"
+  }
+}
