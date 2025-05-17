@@ -1,4 +1,3 @@
-// src/app/charts/age-stats-chart.component.ts
 import { Component, OnInit } from '@angular/core';
 import { EChartsOption } from 'echarts';
 import { ChartsComponent } from '../charts.component';
@@ -7,17 +6,7 @@ import { ChartsComponent } from '../charts.component';
   selector: 'app-age-stats-chart',
   standalone: true,
   imports: [ChartsComponent],
-  template: `
-    <div class="bg-white rounded-2xl shadow p-6 flex flex-col">
-      <div class="flex items-center mb-4">
-        <img src="assets/statistics.png" class="w-6 h-6 mr-2" />
-        <h4 class="text-lg font-medium">Статистика по возрасту</h4>
-      </div>
-      <div class="w-full h-64">
-        <app-charts [options]="option"></app-charts>
-      </div>
-    </div>
-  `,
+  templateUrl: './age-stats-chart.component.html',
 })
 export class AgeStatsChartComponent implements OnInit {
   option!: EChartsOption;
