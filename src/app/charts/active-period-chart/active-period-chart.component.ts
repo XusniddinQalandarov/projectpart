@@ -6,29 +6,7 @@ import { ChartsComponent } from '../charts.component';
   selector: 'app-active-period-chart',
   standalone: true,
   imports: [ChartsComponent],
-  template: `
-    <div class="bg-white rounded-2xl shadow p-6 flex flex-col">
-      <div class="flex items-center justify-between mb-4">
-        <h4 class="text-lg font-medium">Active period</h4>
-        <div class="space-x-2">
-          <button class="px-3 py-1 rounded-full bg-gray-200 text-sm">
-            Month
-          </button>
-          <button class="px-3 py-1 rounded-full bg-gray-200 text-sm">
-            Days
-          </button>
-          <button
-            class="px-3 py-1 rounded-full bg-indigo-500 text-white text-sm"
-          >
-            Hour
-          </button>
-        </div>
-      </div>
-      <div class="w-full h-48">
-        <app-charts [options]="option"></app-charts>
-      </div>
-    </div>
-  `,
+  templateUrl: './active-period-chart.component.html',
 })
 export class ActivePeriodChartComponent implements OnInit {
   option!: EChartsOption;

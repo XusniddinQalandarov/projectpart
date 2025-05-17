@@ -15,8 +15,8 @@ export class GenderStatsChartComponent implements OnInit {
     const femaleValue = 1200;
     const totalValue = maleValue + femaleValue;
     const chartData = [
-      { value: maleValue, name: 'Male' },
-      { value: femaleValue, name: 'Female' },
+      { value: maleValue, name: 'Эркаклар' },
+      { value: femaleValue, name: 'Аёллар' },
     ];
 
     this.option = {
@@ -26,8 +26,8 @@ export class GenderStatsChartComponent implements OnInit {
         formatter: '{b}: {c} ({d}%)',
       },
       legend: {
-        orient: 'vertical',
-        top: 'middle',
+        orient: 'horizontal',
+        top: 'right',
         right: '10%',
         itemGap: 10,
         formatter: (name: string) => {
@@ -46,15 +46,30 @@ export class GenderStatsChartComponent implements OnInit {
           },
           option: {
             legend: {
-              orient: 'horizontal',
+              orient: 'vertical',
               top: 'bottom',
               left: 'center',
               right: 'auto',
               padding: [10, 0, 0, 0],
+              itemGap: 8,
             },
             series: [
               {
-                center: ['50%', '50%'],
+                center: ['50%', '40%'],
+              },
+            ],
+            graphic: [
+              {
+                id: 'total',
+                style: {
+                  fontSize: 18,
+                },
+              },
+              {
+                id: 'label',
+                style: {
+                  fontSize: 6,
+                },
               },
             ],
           },
@@ -64,15 +79,33 @@ export class GenderStatsChartComponent implements OnInit {
         {
           name: 'Access From',
           type: 'pie',
-          radius: ['50%', '70%'],
+          radius: ['60%', '70%'],
           avoidLabelOverlap: true,
           label: {
-            show: false,
+            show: true,
             position: 'center',
+            formatter: function () {
+              return '{total|' + totalValue + '}\n{label|Умумий сони}';
+            },
+            rich: {
+              total: {
+                color: '#333',
+                fontSize: 24,
+                fontWeight: 'bold',
+                lineHeight: 30,
+              },
+              label: {
+                color: '#666',
+                fontSize: 12,
+                lineHeight: 20,
+              },
+            },
+            borderRadius: 8,
+            padding: [5, 10],
           },
           emphasis: {
             label: {
-              show: false,
+              show: true,
             },
           },
           labelLine: {
@@ -84,25 +117,35 @@ export class GenderStatsChartComponent implements OnInit {
       graphic: [
         {
           type: 'text',
-          left: '46%',
+          id: 'total',
+          left: '50%',
           top: '45%',
+          z: 10,
           style: {
             text: totalValue.toString(),
             align: 'center',
-            fill: '#333',
             fontSize: 24,
             fontWeight: 'bold',
+            width: 100,
+            height: 30,
+            overflow: 'none',
+            borderRadius: 4,
           },
         },
         {
           type: 'text',
-          left: '45%',
+          id: 'label',
+          left: '50%',
           top: '55%',
+          z: 10,
           style: {
             text: 'Умумий сони',
             align: 'center',
-            fill: '#666',
             fontSize: 12,
+            width: 100,
+            height: 20,
+            overflow: 'none',
+            borderRadius: 4,
           },
         },
       ],

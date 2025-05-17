@@ -1,1 +1,24 @@
-<p>active-period-chart works!</p>
+<div class="bg-white rounded-2xl shadow p-4 sm:p-5 md:p-6 grid grid-rows-[auto_1fr] gap-y-3 sm:gap-y-4">
+
+  <div class="grid grid-cols-1 sm:grid-cols-[auto_1fr] gap-y-3 sm:gap-x-4 items-center">
+    <h4 class="text-base sm:text-lg font-medium justify-self-center sm:justify-self-start">Active period</h4>
+
+    <div class="flex justify-center lg:justify-end items-center space-x-2">
+    <button class="px-3 py-1 rounded-full bg-gray-200 text-sm">
+      Month
+    </button>
+    <button class="px-3 py-1 rounded-full bg-gray-200 text-sm">
+      Days
+    </button>
+    <button
+      class="px-3 py-1 rounded-full bg-indigo-500 text-white text-sm"
+    >
+      Hour
+    </button>
+  </div>
+  </div>
+
+  <div class="w-full h-48 sm:h-56 md:h-64">
+    <app-charts [options]="option"></app-charts>
+  </div>
+</div>
