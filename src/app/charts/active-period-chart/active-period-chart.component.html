@@ -4,14 +4,21 @@
     <h4 class="text-base sm:text-lg font-medium justify-self-center sm:justify-self-start">Active period</h4>
 
     <div class="flex justify-center lg:justify-end items-center space-x-2">
-    <button class="px-3 py-1 rounded-full bg-gray-200 text-sm">
+    <button
+    (click)="setPeriod('monthly')"
+    class="px-3 py-1 rounded-full text-sm"
+        [ngClass]="selectedPeriod() === 'monthly' ? 'bg-indigo-500 text-white' : 'bg-gray-200'">
       Month
     </button>
-    <button class="px-3 py-1 rounded-full bg-gray-200 text-sm">
+    <button (click)="setPeriod('daily')"
+    class="px-3 py-1 rounded-full text-sm"
+        [ngClass]="selectedPeriod() === 'daily' ? 'bg-indigo-500 text-white' : 'bg-gray-200'">
       Days
     </button>
     <button
-      class="px-3 py-1 rounded-full bg-indigo-500 text-white text-sm"
+      (click)="setPeriod('hourly')"
+    class="px-3 py-1 rounded-full text-sm"
+        [ngClass]="selectedPeriod() === 'hourly' ? 'bg-indigo-500 text-white' : 'bg-gray-200'"
     >
       Hour
     </button>
@@ -19,6 +26,14 @@
   </div>
 
   <div class="w-full h-48 sm:h-56 md:h-64">
-    <app-charts [options]="option"></app-charts>
+    @if (selectedPeriod() === 'hourly'){
+      <app-hourly-info></app-hourly-info>
+    }
+    @else if (selectedPeriod() === 'daily') {
+      <app-weekly-info></app-weekly-info>
+    }
+    @else if (selectedPeriod()==='monthly') {
+      <app-monthly-info></app-monthly-info>
+    }
   </div>
 </div>

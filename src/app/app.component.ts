@@ -1,15 +1,12 @@
 // src/app/app.component.ts
 import { Component } from '@angular/core';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [DashboardComponent],
-  template: `
-    <main class="min-h-screen bg-gray-50 p-4">
-      <app-dashboard></app-dashboard>
-    </main>
-  `,
+  imports: [DashboardComponent, RouterOutlet],
+  template: ` <router-outlet /> `,
 })
 export class AppComponent {}

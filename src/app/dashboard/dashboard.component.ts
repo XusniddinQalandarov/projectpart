@@ -8,6 +8,7 @@ import {
 } from '../charts/top5-chart/top5-chart.component';
 import { StatCardComponent } from '../charts/stat-card/stat-card.component';
 import { DecimalPipe } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,6 +20,7 @@ import { DecimalPipe } from '@angular/common';
     Top5ChartComponent,
     StatCardComponent,
     DecimalPipe,
+    RouterLink,
   ],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],

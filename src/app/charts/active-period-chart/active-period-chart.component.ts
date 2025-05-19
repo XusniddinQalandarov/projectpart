@@ -1,41 +1,32 @@
-import { Component, OnInit } from '@angular/core';
-import { EChartsOption } from 'echarts';
-import { ChartsComponent } from '../charts.component';
+import { Component, WritableSignal } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+import { ChartStateService } from './chart-state.service';
+import { HourlyInfoComponent } from './hourl-info/hourly-info.component';
+import { MonthlyInfoComponent } from './monthly-info/monthly-info.component';
+import { WeeklyInfoComponent } from './weekly-info/weekly-info.component';
+
+type Period = 'hourly' | 'daily' | 'monthly';
 
 @Component({
   selector: 'app-active-period-chart',
-  standalone: true,
-  imports: [ChartsComponent],
+
+  imports: [
+    CommonModule,
+    HourlyInfoComponent,
+    MonthlyInfoComponent,
+    WeeklyInfoComponent,
+  ],
   templateUrl: './active-period-chart.component.html',
 })
-export class ActivePeriodChartComponent implements OnInit {
-  option!: EChartsOption;
+export class ActivePeriodChartComponent {
+  selectedPeriod: WritableSignal<Period>;
 
-  ngOnInit() {
-    const hours = Array.from(
-      { length: 6 },
-      (_, i) => i.toString().padStart(2, '0') + ':00'
-    );
-    const values = [200, 150, 180, 120, 100, 250];
-    this.option = {
-      tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
-      grid: {
-        left: '1%',
-        right: '4%',
-        bottom: '3%',
-        containLabel: true,
-      },
-      xAxis: { type: 'category', data: hours, boundaryGap: true },
-      yAxis: { type: 'value' },
-      max: 300,
-      color: ['#3B82F6'],
-      series: [
-        {
-          type: 'bar',
-          data: values,
-          barWidth: '50%',
-        },
-      ],
-    };
+  constructor(private chartStateService: ChartStateService) {
+    this.selectedPeriod = this.chartStateService.selectedPeriod;
+  }
+
+  setPeriod(period: Period): void {
+    this.chartStateService.setPeriod(period);
   }
 }

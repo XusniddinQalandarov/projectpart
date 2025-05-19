@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-argos',
   standalone: true,
-  imports: [CommonModule, TranslocoModule],
+  imports: [CommonModule, TranslocoModule, RouterLink],
   templateUrl: './argos.component.html',
 })
 export class ArgosComponent {
