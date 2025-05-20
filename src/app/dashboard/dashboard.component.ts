@@ -29,7 +29,7 @@ export class DashboardComponent {
     { name: 'ELEKTRON TIJORAT', value: 9568 },
     { name: 'WEB DESIGN', value: 7851 },
     { name: "SMM - Social Media Marketing video-o'quv kursi", value: 3546 },
-    { name: "ULTIMOY MEDIA MARKETING o'quv qo'llanma", value: 3546 },
+    { name: "IJTIMOIY MEDIA MARKETING o'quv qo'llanma", value: 3546 },
   ];
 
   successData: Top5Datum[] = [
@@ -42,7 +42,7 @@ export class DashboardComponent {
       isPercent: ' %',
     },
     {
-      name: "ULTIMOY MEDIA MARKETING o'quv qo'llanma",
+      name: "IJTIMOIY MEDIA MARKETING o'quv qo'llanma",
       value: 56.3,
       isPercent: ' %',
     },
