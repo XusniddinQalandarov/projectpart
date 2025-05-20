@@ -9,8 +9,7 @@ import {
 
 import { EChartsOption, BarSeriesOption } from 'echarts';
 import { ChartsComponent } from '../charts.component';
-import { Top5Datum } from './top5.interface';
-import { EChartLabelFormatterParams } from './top5.interface';
+import { Top5Datum, EChartLabelFormatterParams } from './top5.interface';
 
 @Component({
   selector: 'app-top5-chart',
@@ -32,12 +31,13 @@ export class Top5ChartComponent implements OnChanges, OnInit {
     }
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.checkView();
     this.updateChart();
   }
+
   @HostListener('window:resize', ['$event'])
-  onResize() {
+  onResize(): void {
     const oldIsSmallView = this.isSmallView;
     this.checkView();
     if (oldIsSmallView !== this.isSmallView) {
@@ -45,11 +45,11 @@ export class Top5ChartComponent implements OnChanges, OnInit {
     }
   }
 
-  private checkView() {
+  private checkView(): void {
     this.isSmallView = window.innerWidth < this.breakpoint;
   }
 
-  private updateChart() {
+  private updateChart(): void {
     if (!this.data || this.data.length === 0) {
       this.option = {
         title: {
@@ -68,9 +68,9 @@ export class Top5ChartComponent implements OnChanges, OnInit {
   }
 
   private getHorizontalChartOptions(chartData: Top5Datum[]): EChartsOption {
-    const names = chartData.map((d) => d.name);
+    const names = chartData.map((d: Top5Datum) => d.name);
 
-    let yAxisConfig: EChartsOption['yAxis'] = {
+    const yAxisConfig: EChartsOption['yAxis'] = {
       type: 'category',
       data: names,
       inverse: true,
@@ -79,13 +79,13 @@ export class Top5ChartComponent implements OnChanges, OnInit {
       axisLabel: {
         show: true,
         fontSize: 11,
-        margin: 8,
+        margin: 10,
         width: 100,
-        overflow: 'truncate',
+        overflow: 'none',
       },
     };
 
-    let seriesLabelConfig: BarSeriesOption['label'] = {
+    const seriesLabelConfig: BarSeriesOption['label'] = {
       show: true,
       position: 'insideRight',
       formatter: (params: EChartLabelFormatterParams) => {
@@ -102,12 +102,10 @@ export class Top5ChartComponent implements OnChanges, OnInit {
       color: '#fff',
       fontSize: 12,
       fontWeight: 'normal',
-      offset: undefined,
-      rich: undefined,
     };
 
-    let gridConfig: EChartsOption['grid'] = {
-      left: '3%',
+    const gridConfig: EChartsOption['grid'] = {
+      left: '5%',
       right: '15%',
       top: '20%',
       bottom: '5%',
@@ -115,49 +113,84 @@ export class Top5ChartComponent implements OnChanges, OnInit {
     };
 
     if (this.isSmallView) {
-      if (yAxisConfig && yAxisConfig.axisLabel) {
-        (yAxisConfig.axisLabel as { show: boolean }).show = false;
-      }
-
-      gridConfig = {
+      const yAxisSmall: EChartsOption['yAxis'] = {
+        type: 'category',
+        data: names,
+        position: 'left',
+        axisLabel: { show: false },
+        axisTick: { show: false },
+        axisLine: { show: false },
+      };
+      const xAxisSmall: EChartsOption['xAxis'] = {
+        type: 'value',
+        axisLabel: { show: false },
+        axisTick: { show: false },
+        axisLine: { show: false },
+        splitLine: { show: false },
+      };
+      const gridSmall: EChartsOption['grid'] = {
         left: '5%',
-        right: '5%',
-        top: '10%',
-        bottom: '20%',
-
-        containLabel: false,
+        top: '15%',
+        bottom: '10%',
+        containLabel: true,
       };
 
-      seriesLabelConfig = {
-        show: true,
-        position: 'insideLeft',
-        offset: [1, 8],
+      const nameSeries: BarSeriesOption = {
+        type: 'bar',
+        data: chartData.map(() => 0),
+        silent: true,
+        itemStyle: { color: 'transparent' },
+        barGap: '-100%',
+        barCategoryGap: '200%',
+        label: {
+          show: true,
+          position: [0, -15],
+          align: 'left',
+          formatter: '{name|{b}}',
+          rich: {
+            name: {
+              overflow: 'break',
+            } as any,
+          },
+        },
+      };
 
-        formatter: (params: EChartLabelFormatterParams) => {
-          const datum = params.data as Top5Datum;
-          const nameStr = datum.name;
-          let valueStr = datum.value
-            .toString()
-            .replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
-          if (datum.isPercent) {
-            valueStr += datum.isPercent;
-          }
-          return `{value|${valueStr}}\n{name|${nameStr}}`;
-        },
-        rich: {
-          value: {
-            color: '#fff',
-            fontSize: 10,
-            lineHeight: 14,
-            align: 'left',
+      const valueSeries: BarSeriesOption = {
+        type: 'bar',
+        data: chartData,
+        itemStyle: { color: this.barColor, borderRadius: 3 },
+        barGap: '-100%',
+        barWidth: '22',
+        barCategoryGap: '100%',
+        label: {
+          show: true,
+          position: 'insideRight',
+          formatter: (params: EChartLabelFormatterParams) => {
+            const d = params.data as Top5Datum;
+            let v = d.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+            if (d.isPercent) {
+              v += '%';
+            }
+            return v;
           },
-          name: {
-            color: '#4b5563',
-            fontSize: 9,
-            lineHeight: 12,
-            align: 'left',
-          },
+          color: '#fff',
+          fontSize: 12,
+          align: 'right',
+          distance: 5,
         },
+      };
+
+      return {
+        title: {
+          text: this.title,
+          left: 'center',
+          top: '3%',
+          textStyle: { fontSize: '14' },
+        },
+        grid: gridSmall,
+        xAxis: xAxisSmall,
+        yAxis: yAxisSmall,
+        series: [nameSeries, valueSeries],
       };
     }
 
@@ -165,10 +198,8 @@ export class Top5ChartComponent implements OnChanges, OnInit {
       title: {
         text: this.title,
         left: 'center',
-        top: this.isSmallView ? '3%' : '5%',
-        textStyle: {
-          fontSize: this.isSmallView ? 14 : 16,
-        },
+        top: '5%',
+        textStyle: { fontSize: 16 },
       },
       tooltip: {
         trigger: 'axis',
@@ -202,14 +233,15 @@ export class Top5ChartComponent implements OnChanges, OnInit {
         {
           type: 'bar',
           data: chartData,
+          barWidth: '50%',
           itemStyle: {
             color: this.barColor,
-            borderRadius: this.isSmallView ? 3 : 5,
+            borderRadius: 5,
           },
-          barGap: this.isSmallView ? '20%' : '30%',
-          barCategoryGap: this.isSmallView ? '50%' : '40%',
+          barGap: '30%',
+          barCategoryGap: '40%',
           label: seriesLabelConfig,
-        },
+        } as BarSeriesOption,
       ],
     };
   }

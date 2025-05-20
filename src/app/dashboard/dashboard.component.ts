@@ -26,18 +26,26 @@ import { RouterLink } from '@angular/router';
 export class DashboardComponent {
   popularityData: Top5Datum[] = [
     { name: 'INGLIZ TILI', value: 12356 },
-    { name: 'ELEKTRON TUROTAR', value: 9568 },
+    { name: 'ELEKTRON TIJORAT', value: 9568 },
     { name: 'WEB DESIGN', value: 7851 },
-    { name: 'SMM - Social Media Marketing', value: 3546 },
-    { name: 'ULTIMOY MEDIA MARKETING', value: 3546 },
+    { name: "SMM - Social Media Marketing video-o'quv kursi", value: 3546 },
+    { name: "ULTIMOY MEDIA MARKETING o'quv qo'llanma", value: 3546 },
   ];
 
   successData: Top5Datum[] = [
     { name: 'INGLIZ TILI', value: 96.6, isPercent: ' %' },
-    { name: 'ELEKTRON TUROTAR', value: 90.7, isPercent: ' %' },
+    { name: 'ELEKTRON TIJORAT', value: 90.7, isPercent: ' %' },
     { name: 'WEB DESIGN', value: 85.1, isPercent: ' %' },
-    { name: 'SMM - Social Media Marketing', value: 64.2, isPercent: ' %' },
-    { name: 'ULTIMOY MEDIA MARKETING', value: 56.3, isPercent: ' %' },
+    {
+      name: "SMM - Social Media Marketing video-o'quv kursi",
+      value: 64.2,
+      isPercent: ' %',
+    },
+    {
+      name: "ULTIMOY MEDIA MARKETING o'quv qo'llanma",
+      value: 56.3,
+      isPercent: ' %',
+    },
   ];
 
   totalUsers: number = 1234567;
