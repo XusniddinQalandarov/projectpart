@@ -9,16 +9,17 @@
 
 
   <app-top5-chart
-    [title]="'TOP-5 по популярности'"
-    [data]="top5Popularity"
-    barColor="#244192">
-  </app-top5-chart>
+  [title]="'TOP-5 по популярности'"
+  [data]="popularityData"
+  barColor="#1E40AF">
+</app-top5-chart>
 
-  <app-top5-chart
-    [title]="'TOP-5 по успеваемости'"
-    [data]="top5Performance"
-    barColor="#DCBA8D">
-  </app-top5-chart>
+<app-top5-chart
+  [title]="'TOP-5 по успеваемости'"
+  [data]="successData"
+  barColor="#D97706">
+</app-top5-chart>
+
 </div>
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
   <app-stat-card

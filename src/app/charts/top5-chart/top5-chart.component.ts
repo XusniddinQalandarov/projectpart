@@ -5,43 +5,26 @@ import {
   SimpleChanges,
   OnInit,
   HostListener,
-  OnDestroy,
 } from '@angular/core';
 
 import { EChartsOption, BarSeriesOption } from 'echarts';
 import { ChartsComponent } from '../charts.component';
-
-export interface Top5Datum {
-  name: string;
-  value: number;
-}
-
-// Interface for ECharts label formatter parameters.
-// This interface needs to be compatible with ECharts' internal CallbackDataParams.
-interface EChartLabelFormatterParams {
-  value: unknown; // ECharts passes a broad type for value.
-  data: unknown; // ECharts' data can be OptionDataItem; 'unknown' is compatible.
-  name: string; // Category name.
-  // Optional: other properties from CallbackDataParams if you need them.
-  // color?: string;
-  // seriesIndex?: number;
-  // dataIndex?: number;
-}
+import { Top5Datum } from './top5.interface';
+import { EChartLabelFormatterParams } from './top5.interface';
 
 @Component({
   selector: 'app-top5-chart',
-  standalone: true,
   imports: [ChartsComponent],
   templateUrl: './top5-chart.component.html',
 })
-export class Top5ChartComponent implements OnChanges, OnInit, OnDestroy {
+export class Top5ChartComponent implements OnChanges, OnInit {
   @Input() title = '';
   @Input() data: Top5Datum[] = [];
   @Input() barColor = '#1E40AF';
 
   option!: EChartsOption;
   private isSmallView = false;
-  private readonly breakpoint = 768; // md breakpoint
+  private readonly breakpoint = 768;
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['data'] || changes['barColor'] || changes['title']) {
@@ -53,11 +36,6 @@ export class Top5ChartComponent implements OnChanges, OnInit, OnDestroy {
     this.checkView();
     this.updateChart();
   }
-
-  ngOnDestroy() {
-    // Angular handles HostListener cleanup.
-  }
-
   @HostListener('window:resize', ['$event'])
   onResize() {
     const oldIsSmallView = this.isSmallView;
@@ -99,7 +77,7 @@ export class Top5ChartComponent implements OnChanges, OnInit, OnDestroy {
       axisTick: { show: false },
       axisLine: { show: false },
       axisLabel: {
-        show: true, // Default for large screens
+        show: true,
         fontSize: 11,
         margin: 8,
         width: 100,
@@ -108,74 +86,67 @@ export class Top5ChartComponent implements OnChanges, OnInit, OnDestroy {
     };
 
     let seriesLabelConfig: BarSeriesOption['label'] = {
-      show: true, // Default for large screens
+      show: true,
       position: 'insideRight',
       formatter: (params: EChartLabelFormatterParams) => {
-        const datum = params.data as Top5Datum; // Assert type
+        const datum = params.data as Top5Datum;
         return datum.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
       },
       distance: 5,
       color: '#fff',
       fontSize: 12,
       fontWeight: 'normal',
+      offset: undefined,
+      rich: undefined,
     };
 
     let gridConfig: EChartsOption['grid'] = {
       left: '3%',
       right: '15%',
-      top: '15%',
+      top: '20%',
       bottom: '5%',
       containLabel: true,
     };
 
     if (this.isSmallView) {
-      if (yAxisConfig) {
-        if (Array.isArray(yAxisConfig)) {
-          const firstAxis = yAxisConfig[0];
-          if (firstAxis && firstAxis.axisLabel) {
-            firstAxis.axisLabel.show = false;
-          }
-        } else {
-          if (yAxisConfig.axisLabel) {
-            yAxisConfig.axisLabel.show = false;
-          }
-        }
+      if (yAxisConfig && yAxisConfig.axisLabel) {
+        (yAxisConfig.axisLabel as { show: boolean }).show = false;
       }
 
       gridConfig = {
         left: '5%',
         right: '5%',
-        top: '15%',
-        bottom: '35%',
-        containLabel: true,
+        top: '10%',
+        bottom: '20%',
+
+        containLabel: false,
       };
 
       seriesLabelConfig = {
         show: true,
         position: 'insideLeft',
-        offset: [15, 10],
+        offset: [1, 8],
+
         formatter: (params: EChartLabelFormatterParams) => {
           const datum = params.data as Top5Datum;
           const nameStr = datum.name;
           const valueStr = datum.value
             .toString()
             .replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
-          const truncatedName =
-            nameStr.length > 18 ? nameStr.substring(0, 15) + '...' : nameStr;
-          return `{value|${valueStr}}\n{name|${truncatedName}}`;
+          return `{value|${valueStr}}\n{name|${nameStr}}`;
         },
         rich: {
           value: {
-            color: '#333',
-            fontSize: 11,
+            color: '#fff',
+            fontSize: 10,
             fontWeight: 'bold',
-            lineHeight: 16,
+            lineHeight: 14,
             align: 'left',
           },
           name: {
-            color: '#666',
-            fontSize: 10,
-            lineHeight: 14,
+            color: '#4b5563',
+            fontSize: 9,
+            lineHeight: 12,
             align: 'left',
           },
         },
@@ -186,7 +157,10 @@ export class Top5ChartComponent implements OnChanges, OnInit, OnDestroy {
       title: {
         text: this.title,
         left: 'center',
-        top: '5%',
+        top: this.isSmallView ? '3%' : '5%',
+        textStyle: {
+          fontSize: this.isSmallView ? 14 : 16,
+        },
       },
       tooltip: {
         trigger: 'axis',
@@ -218,9 +192,10 @@ export class Top5ChartComponent implements OnChanges, OnInit, OnDestroy {
           data: chartData,
           itemStyle: {
             color: this.barColor,
-            borderRadius: 5,
+            borderRadius: this.isSmallView ? 3 : 5,
           },
-          barCategoryGap: '40%',
+          barGap: this.isSmallView ? '20%' : '30%',
+          barCategoryGap: this.isSmallView ? '50%' : '40%',
           label: seriesLabelConfig,
         },
       ],

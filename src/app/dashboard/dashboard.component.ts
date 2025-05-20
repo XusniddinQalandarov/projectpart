@@ -2,10 +2,8 @@ import { Component } from '@angular/core';
 import { GenderStatsChartComponent } from '../charts/gender-stats-charts/gender-stats-charts.component';
 import { AgeStatsChartComponent } from '../charts/age-stats-chart/age-stats-chart.component';
 import { ActivePeriodChartComponent } from '../charts/active-period-chart/active-period-chart.component';
-import {
-  Top5ChartComponent,
-  Top5Datum,
-} from '../charts/top5-chart/top5-chart.component';
+import { Top5Datum } from '../charts/top5-chart/top5.interface';
+import { Top5ChartComponent } from '../charts/top5-chart/top5-chart.component';
 import { StatCardComponent } from '../charts/stat-card/stat-card.component';
 import { DecimalPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
@@ -26,7 +24,7 @@ import { RouterLink } from '@angular/router';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent {
-  top5Popularity: Top5Datum[] = [
+  popularityData: Top5Datum[] = [
     { name: 'INGLIZ TILI', value: 12356 },
     { name: 'ELEKTRON TUROTAR', value: 9568 },
     { name: 'WEB DESIGN', value: 7851 },
@@ -34,7 +32,7 @@ export class DashboardComponent {
     { name: 'ULTIMOY MEDIA MARKETING', value: 3546 },
   ];
 
-  top5Performance: Top5Datum[] = [
+  successData: Top5Datum[] = [
     { name: 'INGLIZ TILI', value: 96.6 },
     { name: 'ELEKTRON TUROTAR', value: 90.7 },
     { name: 'WEB DESIGN', value: 85.1 },
