@@ -114,6 +114,7 @@ export class Top5ChartComponent implements OnChanges, OnInit {
 
     if (this.isSmallView) {
       const yAxisSmall: EChartsOption['yAxis'] = {
+        inverse: true,
         type: 'category',
         data: names,
         position: 'left',
