@@ -90,7 +90,13 @@ export class Top5ChartComponent implements OnChanges, OnInit {
       position: 'insideRight',
       formatter: (params: EChartLabelFormatterParams) => {
         const datum = params.data as Top5Datum;
-        return datum.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+        let valueString = datum.value
+          .toString()
+          .replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+        if (datum.isPercent) {
+          valueString += datum.isPercent;
+        }
+        return valueString;
       },
       distance: 5,
       color: '#fff',
@@ -130,16 +136,18 @@ export class Top5ChartComponent implements OnChanges, OnInit {
         formatter: (params: EChartLabelFormatterParams) => {
           const datum = params.data as Top5Datum;
           const nameStr = datum.name;
-          const valueStr = datum.value
+          let valueStr = datum.value
             .toString()
             .replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+          if (datum.isPercent) {
+            valueStr += datum.isPercent;
+          }
           return `{value|${valueStr}}\n{name|${nameStr}}`;
         },
         rich: {
           value: {
             color: '#fff',
             fontSize: 10,
-            fontWeight: 'bold',
             lineHeight: 14,
             align: 'left',
           },
@@ -169,9 +177,13 @@ export class Top5ChartComponent implements OnChanges, OnInit {
           if (Array.isArray(paramsArray) && paramsArray.length > 0) {
             const params = paramsArray[0];
             const dataItem = params.data as Top5Datum;
-            return `${params.name}: ${dataItem.value
+            let valueString = dataItem.value
               .toString()
-              .replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}`;
+              .replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+            if (dataItem.isPercent) {
+              valueString += dataItem.isPercent;
+            }
+            return `${params.name}: ${valueString}`;
           }
           return '';
         },

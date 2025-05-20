@@ -33,11 +33,11 @@ export class DashboardComponent {
   ];
 
   successData: Top5Datum[] = [
-    { name: 'INGLIZ TILI', value: 96.6 },
-    { name: 'ELEKTRON TUROTAR', value: 90.7 },
-    { name: 'WEB DESIGN', value: 85.1 },
-    { name: 'SMM - Social Media Marketing', value: 64.2 },
-    { name: 'ULTIMOY MEDIA MARKETING', value: 56.3 },
+    { name: 'INGLIZ TILI', value: 96.6, isPercent: ' %' },
+    { name: 'ELEKTRON TUROTAR', value: 90.7, isPercent: ' %' },
+    { name: 'WEB DESIGN', value: 85.1, isPercent: ' %' },
+    { name: 'SMM - Social Media Marketing', value: 64.2, isPercent: ' %' },
+    { name: 'ULTIMOY MEDIA MARKETING', value: 56.3, isPercent: ' %' },
   ];
 
   totalUsers: number = 1234567;

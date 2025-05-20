@@ -1,6 +1,7 @@
 export interface Top5Datum {
   name: string;
   value: number;
+  isPercent?: string;
 }
 
 export interface EChartLabelFormatterParams {
