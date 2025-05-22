@@ -5,13 +5,13 @@
     <div
       class="hidden md:grid gap-4"
       style="
-        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
         grid-template-areas:
-          'top top top top top top top top'
-          'left left map map map map right right'
-          'left left map map map map right right'
-          'left left map map map map right right'
-          'bottom bottom bottom bottom bottom bottom bottom bottom';
+          'top top top top '
+          'left map map right'
+          'left map map right'
+          'left map map right'
+          'bottom bottom bottom bottom';
       "
     >
       <div class="grid grid-cols-4 gap-4" style="grid-area: top">
@@ -40,14 +40,14 @@
 
       <div
         class="bg-white p-4 rounded-lg shadow border border-blue-200 flex items-center justify-center"
-        style="grid-area: map; min-height: 500px; aspect-ratio: 1/1"
+        style="grid-area: map"
       >
         <div
           class="flex items-center justify-center h-full w-full overflow-hidden"
         >
           <app-map-uzbekistan
             [selectedRegionId]="selectedRegionId"
-            class="max-w-full max-h-full object-contain transform scale-120"
+            class="max-w-full max-h-full object-contain transform"
           ></app-map-uzbekistan>
         </div>
       </div>
