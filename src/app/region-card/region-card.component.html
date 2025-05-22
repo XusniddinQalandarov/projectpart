@@ -1,0 +1,46 @@
+<div
+  *ngIf="data"
+  class="bg-white p-4 rounded-lg shadow h-full flex flex-col cursor-pointer transition-all duration-200"
+  [class.border-1]="isSelected"
+  [class.border-blue-500]="isSelected"
+  [class.border-transparent]="!isSelected"
+  (click)="onCardClick()"
+>
+  <div>
+    <h3 class="text-[16px] font-[550] text-[#3620B7]">{{ data.name }}</h3>
+    <p class="text-[32px] font-[700] mt-1">{{ data.totalUsers }}</p>
+    <p class="text-[14px] font-[400] text-[#272E59]">{{ data.usersLabel }}</p>
+  </div>
+
+  <div class="mt-3 pt-3 border-t border-dashed border-[#AAA6CF0] flex-grow">
+    <div class="flex justify-between items-center text-xs mb-1 font-bold">
+      <span>{{ data.averageResultLabel }}</span>
+      <span class="font-bold">{{ data.averageResultValue }}</span>
+    </div>
+    <div class="flex justify-between items-center text-xs text-gray-600 mb-1">
+      <span class="flex items-center gap-1">
+        <img src="/assets/soat.png" alt="soat" class="ml-1.5 h-5 w-auto" />
+        {{ data.inProgressLabel }}
+      </span>
+      <span>{{ data.inProgressValue }}</span>
+    </div>
+    <div class="flex justify-between items-center text-xs text-gray-600 mb-1">
+      <span class="flex items-center gap-2">
+        <img src="/assets/tugadi.png" alt="soat" class="ml-2 h-[14px] w-auto" />
+        {{ data.completedLabel }}
+      </span>
+      <span>{{ data.completedValue }}</span>
+    </div>
+    <div class="flex justify-between items-center text-xs text-gray-600">
+      <span class="flex items-center gap-2">
+        <img
+          src="/assets/sertifikat.png"
+          alt="soat"
+          class="ml-2 h-3.5 w-auto"
+        />
+        {{ data.certificatesLabel }}
+      </span>
+      <span>{{ data.certificatesValue }}</span>
+    </div>
+  </div>
+</div>
